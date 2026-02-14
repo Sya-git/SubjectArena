@@ -11,11 +11,17 @@ namespace SubjectArena.Player
 {
     public class PlayerController : MonoBehaviour
     {
+        private static readonly int AnimMovingParameter = Animator.StringToHash("Moving");
+        private static readonly int AnimDieParameter = Animator.StringToHash("Die");
+        private static readonly int AnimAttackParameter = Animator.StringToHash("Attack");
+
         [SerializeField] private PlayerInputProcessor playerInputProcessor;
         [SerializeField] private CharacterControllerMotor characterControllerMotor;
         [FormerlySerializedAs("inventoryManager")]
         [SerializeField] private InventoryController inventory;
+        [SerializeField] private PlayerAttackHandler attackHandler;
         [SerializeField] private Health health;
+        [SerializeField] private Animator animator;
 
         public InventoryController Inventory => inventory;
         private Camera _mainCamera;
@@ -28,11 +34,18 @@ namespace SubjectArena.Player
         private void Start()
         {
             health.OnDeath += OnDeath;
+            attackHandler.Evt_OnAttackStarted += OnAttackStarted;
+        }
+
+        private void OnAttackStarted()
+        {
+            animator.SetTrigger(AnimAttackParameter);
         }
 
         private void OnDeath()
         {
             characterControllerMotor.Walk(Vector2.zero);
+            animator.SetTrigger(AnimDieParameter);
         }
 
         private void Update()
@@ -48,6 +61,7 @@ namespace SubjectArena.Player
             var direction = GetCameraRelativeXZDirection(playerInputProcessor.MoveDirection);
             characterControllerMotor.Walk(direction);
             characterControllerMotor.LookAt(direction.ToVector3X0Z());
+            animator.SetBool(AnimMovingParameter, direction != Vector2.zero);
         }
 
         private void CheckForPlayerUsedItems()
@@ -82,7 +96,7 @@ namespace SubjectArena.Player
             var inventorySaveData = inventory.GetSaveData();
             var saveData = new PlayerSaveData()
             {
-                Inventory = inventorySaveData
+                inventory = inventorySaveData
             };
             
             return JsonUtility.ToJson(saveData);
@@ -91,13 +105,13 @@ namespace SubjectArena.Player
         public void LoadSaveData(in string json)
         {
             var saveData = JsonUtility.FromJson<PlayerSaveData>(json);
-            inventory.LoadSaveData(saveData.Inventory);
+            inventory.LoadSaveData(saveData.inventory);
         }
 
         [Serializable]
         private struct PlayerSaveData
         {
-            public string Inventory;
+            public string inventory;
         }
     }
 }

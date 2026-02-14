@@ -19,6 +19,8 @@ namespace SubjectArena.Player
             Cooldown
         }
 
+        public event Action Evt_OnAttackStarted;
+
         private AttackPhase _phase;
         private float _timer;
 
@@ -61,6 +63,7 @@ namespace SubjectArena.Player
             _phase = AttackPhase.Active;
             _timer = 0f;
             damageArea.gameObject.SetActive(true);
+            Evt_OnAttackStarted?.Invoke();
         }
 
         private void EnterCooldownPhase()

@@ -31,7 +31,7 @@ namespace SubjectArena.Movement
             if (worldDirection.sqrMagnitude > 0.01f)
             {
                 var normalizedDirection = worldDirection.normalized;
-                _lookDirection = new Vector3(normalizedDirection.z, 0, -normalizedDirection.x);
+                _lookDirection = normalizedDirection;
             }
         }
 
