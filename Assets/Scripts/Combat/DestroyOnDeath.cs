@@ -1,8 +1,6 @@
-﻿using System;
-using SubjectArena.Entities;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace DefaultNamespace
+namespace SubjectArena.Combat
 {
     public class DestroyOnDeath : MonoBehaviour
     {

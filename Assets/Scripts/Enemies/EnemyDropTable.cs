@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using SubjectArena.Entities;
+using SubjectArena.Combat;
 using SubjectArena.Items;
+using SubjectArena.Items.Data;
 using UnityEngine;
 
 namespace SubjectArena.Enemies

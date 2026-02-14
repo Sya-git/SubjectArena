@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using SubjectArena.Data;
+using UnityEngine;
 
-namespace SubjectArena.Items
+namespace SubjectArena.Items.Data
 {
-    public abstract class UsableItemData : ScriptableObject
+    public abstract class UsableItemData : SubjectArenaBaseData
     {
         [SerializeField] private string itemName;
         [SerializeField, TextArea] private string description;

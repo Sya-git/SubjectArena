@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using SubjectArena.Items.Data;
 
 namespace SubjectArena.Items
 {
@@ -26,6 +28,17 @@ namespace SubjectArena.Items
 
             Quantity--;
             return true;
+        }
+
+        public Dictionary<string, object> GetSaveData()
+        {
+            var saveData = new Dictionary<string, object>();
+            if (ItemData)
+            {
+                saveData.Add("ItemData", ItemData.Guid);
+                saveData.Add("Quantity", Quantity);
+            }
+            return saveData;
         }
     }
 }

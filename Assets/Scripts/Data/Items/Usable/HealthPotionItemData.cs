@@ -1,7 +1,7 @@
-﻿using SubjectArena.Entities;
+﻿using SubjectArena.Combat;
 using UnityEngine;
 
-namespace SubjectArena.Items
+namespace SubjectArena.Items.Data
 {
     [CreateAssetMenu(menuName = "SubjectArena/Items/Heal Potion")]
     public class HealItemData : UsableItemData

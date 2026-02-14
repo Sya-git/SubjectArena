@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using SubjectArena.Entities;
 using UnityEngine;
 
 namespace SubjectArena.Combat

@@ -14,7 +14,7 @@ namespace SubjectArena.UI.Inventory
         private CanvasItemSlot[] _usableItems;
         private CanvasItemSlot[] _bagItems;
 
-        private PlayerInventoryManager _inventoryManager;
+        private PlayerInventory _inventory;
         private bool _isDragging;
 
         private void Awake()
@@ -24,7 +24,7 @@ namespace SubjectArena.UI.Inventory
 
         private void OnDestroy()
         {
-            if (_inventoryManager) _inventoryManager.OnSlotChanged -= OnInventorySlotChanged;
+            if (_inventory) _inventory.OnSlotChanged -= OnInventorySlotChanged;
         }
 
         private void ClearAllCurrentItems()
@@ -48,44 +48,44 @@ namespace SubjectArena.UI.Inventory
         {
             dragItemDummy.gameObject.SetActive(false);
             
-            _inventoryManager = player.GetComponent<PlayerInventoryManager>();
-            if (_inventoryManager)
+            _inventory = player.GetComponent<PlayerInventory>();
+            if (_inventory)
             {
-                _bagItems = new CanvasItemSlot[_inventoryManager.BagSlots.Length];
-                for (var i = 0; i < _inventoryManager.BagSlots.Length; ++i)
+                _bagItems = new CanvasItemSlot[_inventory.BagSlots.Length];
+                for (var i = 0; i < _inventory.BagSlots.Length; ++i)
                 {
-                    var bagSlot = _inventoryManager.BagSlots[i];
+                    var bagSlot = _inventory.BagSlots[i];
                     var canvasBagSlot = SpawnItemSlot(bagItemsHolder);
                     canvasBagSlot.Evt_OnBeginDrag += OnDragStart;
                     canvasBagSlot.Evt_OnDrag += OnDrag;
                     canvasBagSlot.Evt_OnEndDrag += OnDragEnd;
-                    canvasBagSlot.Refresh(i, bagSlot, PlayerInventoryManager.SlotType.Bag);
+                    canvasBagSlot.Refresh(i, bagSlot, PlayerInventory.SlotType.Bag);
                     _bagItems[i] = canvasBagSlot;
                 }
                 
-                _usableItems = new CanvasItemSlot[_inventoryManager.UsableSlots.Length];
-                for (var i=0; i<_inventoryManager.UsableSlots.Length; ++i)
+                _usableItems = new CanvasItemSlot[_inventory.UsableSlots.Length];
+                for (var i=0; i<_inventory.UsableSlots.Length; ++i)
                 {
-                    var usableSlot = _inventoryManager.UsableSlots[i];
+                    var usableSlot = _inventory.UsableSlots[i];
                     var canvasUsableSlot = SpawnItemSlot(usableItemsHolder);
                     canvasUsableSlot.Evt_OnBeginDrag += OnDragStart;
                     canvasUsableSlot.Evt_OnDrag += OnDrag;
                     canvasUsableSlot.Evt_OnEndDrag += OnDragEnd;
-                    canvasUsableSlot.Refresh(i, usableSlot, PlayerInventoryManager.SlotType.Usable);
+                    canvasUsableSlot.Refresh(i, usableSlot, PlayerInventory.SlotType.Usable);
                     _usableItems[i] = canvasUsableSlot;
                 }
-                _inventoryManager.OnSlotChanged += OnInventorySlotChanged;
+                _inventory.OnSlotChanged += OnInventorySlotChanged;
             }
         }
 
-        private void OnInventorySlotChanged(PlayerInventoryManager.SlotType type, int slotIndex)
+        private void OnInventorySlotChanged(PlayerInventory.SlotType type, int slotIndex)
         {
-            if (!_inventoryManager.GetItemAtSlot(type, slotIndex, out var itemStack))
+            if (!_inventory.GetItemAtSlot(type, slotIndex, out var itemStack))
             {
                 return;
             }
             
-            var canvasItemSlot = (type == PlayerInventoryManager.SlotType.Usable
+            var canvasItemSlot = (type == PlayerInventory.SlotType.Usable
                 ? _usableItems
                 : _bagItems)[slotIndex];
             
@@ -114,14 +114,14 @@ namespace SubjectArena.UI.Inventory
             if (pointerEvent.pointerCurrentRaycast.gameObject)
             {
                 var toSlot = pointerEvent.pointerCurrentRaycast.gameObject.GetComponentInParent<CanvasItemSlot>();
-                if (toSlot && _inventoryManager)
+                if (toSlot && _inventory)
                 {
-                    _inventoryManager.SwapSlots(fromSlot.SlotType, toSlot.SlotType, fromSlot.SlotIndex, toSlot.SlotIndex);
+                    _inventory.SwapSlots(fromSlot.SlotType, toSlot.SlotType, fromSlot.SlotIndex, toSlot.SlotIndex);
                 }
             }
             else
             {   // Trying to destroy item?
-                _inventoryManager.DestroyItemAtSlot(fromSlot.SlotType, fromSlot.SlotIndex);
+                _inventory.DestroyItemAtSlot(fromSlot.SlotType, fromSlot.SlotIndex);
             }
             
             _isDragging = false;

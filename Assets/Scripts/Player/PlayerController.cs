@@ -1,9 +1,11 @@
 using System;
-using SubjectArena.Entities;
+using System.Collections.Generic;
+using SubjectArena.Combat;
 using SubjectArena.Input;
 using SubjectArena.Movement;
 using SubjectArena.Utils;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace SubjectArena.Player
 {
@@ -11,10 +13,10 @@ namespace SubjectArena.Player
     {
         [SerializeField] private PlayerInputProcessor playerInputProcessor;
         [SerializeField] private CharacterControllerMotor characterControllerMotor;
-        [SerializeField] private PlayerInventoryManager inventoryManager;
+        [FormerlySerializedAs("inventoryManager")] [SerializeField] private PlayerInventory inventory;
         [SerializeField] private Health health;
 
-        public PlayerInventoryManager InventoryManager => inventoryManager;
+        public PlayerInventory Inventory => inventory;
         private Camera _mainCamera;
         
         private void Awake()
@@ -51,7 +53,7 @@ namespace SubjectArena.Player
         {
             if (playerInputProcessor.UseItem)
             {
-                inventoryManager.UseItemAtSlot(playerInputProcessor.UsedItemIndex);
+                inventory.UseItemAtSlot(playerInputProcessor.UsedItemIndex);
             }
         }
         
@@ -72,6 +74,29 @@ namespace SubjectArena.Player
             
             var camRelativeDirection = (camForward * direction.y + camRight * direction.x).normalized;
             return camRelativeDirection.ToVector2XZ();
+        }
+
+        public string GetSaveData()
+        {
+            var inventorySaveData = inventory.GetSaveData();
+            var saveData = new PlayerSaveData()
+            {
+                Inventory = inventorySaveData
+            };
+            
+            return JsonUtility.ToJson(saveData);
+        }
+
+        public void LoadSaveData(in string json)
+        {
+            var saveData = JsonUtility.FromJson<PlayerSaveData>(json);
+            inventory.LoadSaveData(saveData.Inventory);
+        }
+
+        [Serializable]
+        private struct PlayerSaveData
+        {
+            public string Inventory;
         }
     }
 }

@@ -12,7 +12,7 @@ public class CanvasItemSlot : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
     [SerializeField] private TMP_Text _txtAmount;
     
     public UsableItemStack ItemStack { get; private set; }
-    public PlayerInventoryManager.SlotType SlotType { get; private set; }
+    public PlayerInventory.SlotType SlotType { get; private set; }
     public int SlotIndex { get; private set; }
 
     public event Action<CanvasItemSlot, PointerEventData> Evt_OnBeginDrag;
@@ -26,7 +26,7 @@ public class CanvasItemSlot : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
 
     public void OnEndDrag(PointerEventData eventData) => Evt_OnEndDrag?.Invoke(this, eventData);
 
-    public void Refresh(int slotIndex, UsableItemStack itemStack, PlayerInventoryManager.SlotType slotType)
+    public void Refresh(int slotIndex, UsableItemStack itemStack, PlayerInventory.SlotType slotType)
     {
         SlotIndex = slotIndex;
         SlotType = slotType;

@@ -17,9 +17,9 @@ namespace SubjectArena.Player
             var groundItem = other.gameObject.GetComponentInParent<GroundItem>();
             if (!groundItem) return;
 
-            if (_playerController.InventoryManager.CanAddItem(groundItem.ItemStack.ItemData, groundItem.ItemStack.Quantity))
+            if (_playerController.Inventory.CanAddItem(groundItem.ItemStack.ItemData, groundItem.ItemStack.Quantity))
             {
-                _playerController.InventoryManager.AddItem(groundItem.ItemStack.ItemData, groundItem.ItemStack.Quantity);
+                _playerController.Inventory.AddItem(groundItem.ItemStack.ItemData, groundItem.ItemStack.Quantity);
                 groundItem.Pickup();
             }
         }

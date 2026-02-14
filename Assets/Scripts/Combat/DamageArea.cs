@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using SubjectArena.Entities;
 using UnityEngine;
 
 namespace SubjectArena.Combat

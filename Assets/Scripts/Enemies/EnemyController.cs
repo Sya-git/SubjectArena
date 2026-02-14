@@ -1,5 +1,4 @@
-using System;
-using SubjectArena.Entities;
+using SubjectArena.Combat;
 using SubjectArena.Movement;
 using SubjectArena.Player;
 using SubjectArena.Utils;

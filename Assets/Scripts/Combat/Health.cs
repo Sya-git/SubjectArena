@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace SubjectArena.Entities
+namespace SubjectArena.Combat
 {
     public class Health : MonoBehaviour
     {

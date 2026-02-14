@@ -1,10 +1,12 @@
 ﻿using System;
+using SubjectArena.Data;
 using SubjectArena.Items;
+using SubjectArena.Items.Data;
 using UnityEngine;
 
 namespace SubjectArena.Player
 {
-    public class PlayerInventoryManager : MonoBehaviour
+    public class PlayerInventory : MonoBehaviour
     {
         [SerializeField] private int usableSlotsAmount = 1;
         [SerializeField] private int bagSlotsAmount = 3;
@@ -24,8 +26,8 @@ namespace SubjectArena.Player
 
         private void Awake()
         {
-            // UsableSlots = new UsableItemStack[usableSlotsAmount];
-            // BagSlots = new UsableItemStack[bagSlotsAmount];
+            UsableSlots = new UsableItemStack[usableSlotsAmount];
+            BagSlots = new UsableItemStack[bagSlotsAmount];
         }
 
         public bool GetItemAtSlot(SlotType slotType, int slotIndex, out UsableItemStack itemStack)
@@ -273,6 +275,83 @@ namespace SubjectArena.Player
             }
 
             return remaining;
+        }
+
+        public string GetSaveData()
+        {
+            var usableSlotsSaveData = new SaveDataItem[UsableSlots.Length];
+            for (var i = 0; i < UsableSlots.Length; i++)
+            {
+                var slot = UsableSlots[i];
+                usableSlotsSaveData[i] = new SaveDataItem()
+                {
+                    itemGuid = slot.ItemData ? slot.ItemData.Guid : string.Empty,
+                    amount = slot.Quantity
+                };
+            }
+            
+            var bagSlotsSaveData = new SaveDataItem[BagSlots.Length];
+            for (var i = 0; i < BagSlots.Length; i++)
+            {
+                var slot = BagSlots[i];
+                bagSlotsSaveData[i] = new SaveDataItem()
+                {
+                    itemGuid = slot.ItemData ? slot.ItemData.Guid : string.Empty,
+                    amount = slot.Quantity
+                };
+            }
+
+            var saveData = new SaveData()
+            {
+                usableSlots = usableSlotsSaveData,
+                bagSlots = bagSlotsSaveData,
+            };
+            
+            return JsonUtility.ToJson(saveData);
+        }
+
+        public void LoadSaveData(in string json)
+        {
+            if (string.IsNullOrEmpty(json)) return;
+            
+            var saveData = JsonUtility.FromJson<SaveData>(json);
+            for (var i = 0; i < UsableSlots.Length; i++)
+            {
+                ref var saveDataItem = ref saveData.usableSlots[i];
+                var item = DataManager.GetDataByGuid<UsableItemData>(saveDataItem.itemGuid);
+                var amount = saveDataItem.amount;
+                if (!item) continue;
+
+                ref var slot = ref UsableSlots[i];
+                slot = new UsableItemStack(item, amount);
+                OnSlotChanged?.Invoke(SlotType.Usable, i);
+            }
+
+            for (var i = 0; i < BagSlots.Length; i++)
+            {
+                ref var saveDataItem = ref saveData.bagSlots[i];
+                var item = DataManager.GetDataByGuid<UsableItemData>(saveDataItem.itemGuid);
+                var amount = saveDataItem.amount;
+                if (!item) continue;
+
+                ref var slot = ref BagSlots[i];
+                slot = new UsableItemStack(item, amount);
+                OnSlotChanged?.Invoke(SlotType.Bag, i);
+            }
+        }
+
+        [Serializable]
+        private struct SaveData
+        {
+            public SaveDataItem[] usableSlots;
+            public SaveDataItem[] bagSlots;
+        }
+
+        [Serializable]
+        private struct SaveDataItem
+        {
+            public string itemGuid;
+            public int amount; 
         }
     }
 }

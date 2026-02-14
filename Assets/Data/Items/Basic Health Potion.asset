@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 824cbd68f6e2407bafe95d1e32274d56, type: 3}
   m_Name: Basic Health Potion
   m_EditorClassIdentifier: Assembly-CSharp::SubjectArena.Items.HealItemData
-  itemName: Health Potion
+  guid: 9150b8478e5de2748aca10191f16b9e5
+  itemName: Basic Health Potion
   description: Use it to recover 5 HP
   icon: {fileID: 21300000, guid: 2273b8d99dc5af64fa857fed095037c1, type: 3}
   maxStack: 3
