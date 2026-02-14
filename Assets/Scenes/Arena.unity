@@ -238,6 +238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SubjectArena.Enemies.EnemyController
   motor: {fileID: 176923041}
+  health: {fileID: 176923045}
 --- !u!114 &176923041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1480,6 +1481,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SubjectArena.Player.PlayerController
   playerInputProcessor: {fileID: 1899651350}
   characterControllerMotor: {fileID: 1899651349}
+  health: {fileID: 1899651354}
 --- !u!143 &1899651352
 CharacterController:
   m_ObjectHideFlags: 0

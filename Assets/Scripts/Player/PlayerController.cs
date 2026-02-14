@@ -1,4 +1,5 @@
 using System;
+using SubjectArena.Entities;
 using SubjectArena.Input;
 using SubjectArena.Movement;
 using SubjectArena.Utils;
@@ -10,6 +11,7 @@ namespace SubjectArena.Player
     {
         [SerializeField] private PlayerInputProcessor playerInputProcessor;
         [SerializeField] private CharacterControllerMotor characterControllerMotor;
+        [SerializeField] private Health health;
 
         private Camera _mainCamera;
         
@@ -21,10 +23,17 @@ namespace SubjectArena.Player
         private void Start()
         {
             GameManager.Instance.Player = this;
+            health.OnDeath += OnDeath;
+        }
+
+        private void OnDeath()
+        {
+            characterControllerMotor.Walk(Vector2.zero);
         }
 
         private void Update()
         {
+            if (!health.IsAlive) return;
             ProcessPlayerMovement();
         }
 

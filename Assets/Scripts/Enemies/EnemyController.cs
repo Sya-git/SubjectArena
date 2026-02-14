@@ -1,3 +1,5 @@
+using System;
+using SubjectArena.Entities;
 using SubjectArena.Movement;
 using SubjectArena.Player;
 using SubjectArena.Utils;
@@ -8,9 +10,22 @@ namespace SubjectArena.Enemies
     public class EnemyController : MonoBehaviour
     {
         [SerializeField] private CharacterControllerMotor motor;
-        
+        [SerializeField] private Health health;
+
+        private void Start()
+        {
+            health.OnDeath += OnDeath;
+        }
+
+        private void OnDeath()
+        {
+            motor.Walk(Vector2.zero);
+        }
+
         private void Update()
         {
+            if (!health.IsAlive) return;
+            
             var gameManager = GameManager.Instance;
             if (gameManager && gameManager.Player)
             {

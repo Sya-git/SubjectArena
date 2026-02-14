@@ -9,6 +9,8 @@ namespace SubjectArena.Entities
         
         public uint MaxHealth => baseHealth;
         public uint CurrentHealth { get; private set; }
+        public bool IsAlive => CurrentHealth > 0;
+        public event Action OnDeath;
 
         private void Start()
         {
@@ -20,6 +22,7 @@ namespace SubjectArena.Entities
             if (CurrentHealth <= 0) return;
             
             CurrentHealth -= Math.Min(damage, CurrentHealth);
+            if (CurrentHealth == 0) OnDeath?.Invoke();
         }
     }
 }
