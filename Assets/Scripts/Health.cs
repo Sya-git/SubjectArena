@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace SubjectArena.Entities
@@ -8,9 +9,16 @@ namespace SubjectArena.Entities
         
         public uint MaxHealth => baseHealth;
         public uint CurrentHealth { get; private set; }
-        
+
+        private void Start()
+        {
+            CurrentHealth = baseHealth;
+        }
+
         public void TakeDamage(uint damage)
         {
+            if (CurrentHealth <= 0) return;
+            
             CurrentHealth -= damage;
         }
     }
