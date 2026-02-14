@@ -11,6 +11,7 @@ namespace SubjectArena.Player
     {
         [SerializeField] private PlayerInputProcessor playerInputProcessor;
         [SerializeField] private CharacterControllerMotor characterControllerMotor;
+        [SerializeField] private PlayerInventoryManager inventoryManager;
         [SerializeField] private Health health;
 
         private Camera _mainCamera;
@@ -22,7 +23,6 @@ namespace SubjectArena.Player
 
         private void Start()
         {
-            GameManager.Instance.Player = this;
             health.OnDeath += OnDeath;
         }
 
@@ -34,7 +34,9 @@ namespace SubjectArena.Player
         private void Update()
         {
             if (!health.IsAlive) return;
+            
             ProcessPlayerMovement();
+            CheckForPlayerUsedItems();
         }
 
         private void ProcessPlayerMovement()
@@ -42,6 +44,14 @@ namespace SubjectArena.Player
             var direction = GetCameraRelativeXZDirection(playerInputProcessor.MoveDirection);
             characterControllerMotor.Walk(direction);
             characterControllerMotor.LookAt(direction.ToVector3X0Z());
+        }
+
+        private void CheckForPlayerUsedItems()
+        {
+            if (playerInputProcessor.UseItem)
+            {
+                inventoryManager.UseItemAtSlot(playerInputProcessor.UsedItemIndex);
+            }
         }
         
         private Vector2 GetCameraRelativeXZDirection(Vector2 direction)

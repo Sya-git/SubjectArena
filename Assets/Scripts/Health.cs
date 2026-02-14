@@ -24,5 +24,12 @@ namespace SubjectArena.Entities
             CurrentHealth -= Math.Min(damage, CurrentHealth);
             if (CurrentHealth == 0) OnDeath?.Invoke();
         }
+
+        public void Heal(uint amount)
+        {
+            if (CurrentHealth <= 0) return;
+
+            CurrentHealth = Math.Min(CurrentHealth + amount, MaxHealth);
+        }
     }
 }
