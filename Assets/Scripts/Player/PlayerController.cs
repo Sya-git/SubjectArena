@@ -9,7 +9,7 @@ namespace SubjectArena.Player
     public class PlayerController : MonoBehaviour
     {
         [SerializeField] private PlayerInputProcessor playerInputProcessor;
-        [SerializeField] private CharacterControllerMovement characterControllerMovement;
+        [SerializeField] private CharacterControllerMotor characterControllerMotor;
 
         private Camera _mainCamera;
         
@@ -18,17 +18,21 @@ namespace SubjectArena.Player
             _mainCamera = Camera.main;
         }
 
+        private void Start()
+        {
+            GameManager.Instance.Player = this;
+        }
+
         private void Update()
         {
             ProcessPlayerMovement();
-            //characterControllerMovement.LookAt(new Vector3(playerInputProcessor.MoveDirection.x, 0, playerInputProcessor.MoveDirection.y));
         }
 
         private void ProcessPlayerMovement()
         {
             var direction = GetCameraRelativeXZDirection(playerInputProcessor.MoveDirection);
-            characterControllerMovement.Walk(direction);
-            characterControllerMovement.LookAt(direction.ToVector3XZ());
+            characterControllerMotor.Walk(direction);
+            characterControllerMotor.LookAt(direction.ToVector3X0Z());
         }
         
         private Vector2 GetCameraRelativeXZDirection(Vector2 direction)
@@ -47,7 +51,7 @@ namespace SubjectArena.Player
             camRight.Normalize();
             
             var camRelativeDirection = (camForward * direction.y + camRight * direction.x).normalized;
-            return camRelativeDirection.ToVector2X0Z();
+            return camRelativeDirection.ToVector2XZ();
         }
     }
 }

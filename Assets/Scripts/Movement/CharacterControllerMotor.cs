@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace SubjectArena.Movement
 {
-    public class CharacterControllerMovement : MonoBehaviour
+    public class CharacterControllerMotor : MonoBehaviour
     {
         [SerializeField] private CharacterController characterController;
         [SerializeField] private float moveSpeed = 5f;
