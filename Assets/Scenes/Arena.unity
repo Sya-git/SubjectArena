@@ -218,6 +218,7 @@ GameObject:
   - component: {fileID: 176923040}
   - component: {fileID: 176923045}
   - component: {fileID: 176923044}
+  - component: {fileID: 176923046}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Untagged
@@ -337,6 +338,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SubjectArena.Entities.Health
   baseHealth: 10
+--- !u!114 &176923046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 176923039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60c96cd1fdf9462f822eac55eeeb0db7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DefaultNamespace.DestroyOnDeath
+  destroyDelay: 1
+  health: {fileID: 176923045}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
