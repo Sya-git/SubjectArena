@@ -119,6 +119,20 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &64438174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc1515ab76e54f068e2f2207940fab32, type: 3}
+  m_Name: Player/Interact
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.InputActionReference
+  m_Asset: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  m_ActionId: 852140f2-7766-474d-8707-702459ba45f3
 --- !u!1 &100042188
 GameObject:
   m_ObjectHideFlags: 0
@@ -131,7 +145,7 @@ GameObject:
   - component: {fileID: 100042192}
   - component: {fileID: 100042191}
   - component: {fileID: 100042190}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: DamagePerSecondArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -188,7 +202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1501fa1f1c5d410b9b6a31973af16099, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SubjectArena.Combat.DamagePerSecondArea
-  damage: 1
+  damage: 5
 --- !u!114 &100042192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -617,20 +631,6 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   CustomBlends: {fileID: 0}
---- !u!114 &391061941
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc1515ab76e54f068e2f2207940fab32, type: 3}
-  m_Name: Player/Move
-  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.InputActionReference
-  m_Asset: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  m_ActionId: 351f2ccd-1f9f-44bf-9bec-d62ac5c5f408
 --- !u!1 &402252199
 GameObject:
   m_ObjectHideFlags: 0
@@ -723,7 +723,7 @@ MonoBehaviour:
   m_StreamingVersion: 20241001
   m_LegacyPriority: 0
   Target:
-    TrackingTarget: {fileID: 1899651348}
+    TrackingTarget: {fileID: 0}
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
@@ -920,6 +920,7 @@ MonoBehaviour:
   playerSpawnPoint: {fileID: 1899651348}
   playerPrefab: {fileID: 5562881239773727289, guid: 1e0fcd9481438a84e91589981cf55f44, type: 3}
   canvasInventoryManager: {fileID: 204483693}
+  cinemachineCamera: {fileID: 402252202}
 --- !u!4 &455948175
 Transform:
   m_ObjectHideFlags: 0
@@ -1500,6 +1501,20 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 180655240219835993, guid: 089dedca1707d4c409571a50a3baecaa, type: 3}
   m_PrefabInstance: {fileID: 1049160563}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1126517364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc1515ab76e54f068e2f2207940fab32, type: 3}
+  m_Name: Player/Move
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.InputActionReference
+  m_Asset: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  m_ActionId: 351f2ccd-1f9f-44bf-9bec-d62ac5c5f408
 --- !u!1 &1398881666
 GameObject:
   m_ObjectHideFlags: 0
@@ -2105,9 +2120,33 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 568167767237768439, guid: 1e0fcd9481438a84e91589981cf55f44, type: 3}
+      propertyPath: iaAsset
+      value: 
+      objectReference: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+    - target: {fileID: 568167767237768439, guid: 1e0fcd9481438a84e91589981cf55f44, type: 3}
       propertyPath: movement
       value: 
-      objectReference: {fileID: 391061941}
+      objectReference: {fileID: 1126517364}
+    - target: {fileID: 568167767237768439, guid: 1e0fcd9481438a84e91589981cf55f44, type: 3}
+      propertyPath: ia.m_Name
+      value: Ia
+      objectReference: {fileID: 0}
+    - target: {fileID: 568167767237768439, guid: 1e0fcd9481438a84e91589981cf55f44, type: 3}
+      propertyPath: iaReference
+      value: 
+      objectReference: {fileID: 64438174}
+    - target: {fileID: 568167767237768439, guid: 1e0fcd9481438a84e91589981cf55f44, type: 3}
+      propertyPath: ia.m_SingletonActionBindings.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 568167767237768439, guid: 1e0fcd9481438a84e91589981cf55f44, type: 3}
+      propertyPath: ia.m_SingletonActionBindings.Array.data[0].m_Id
+      value: f72150db-45ff-497e-811c-50706e55df85
+      objectReference: {fileID: 0}
+    - target: {fileID: 568167767237768439, guid: 1e0fcd9481438a84e91589981cf55f44, type: 3}
+      propertyPath: ia.m_SingletonActionBindings.Array.data[0].m_Action
+      value: Ia
+      objectReference: {fileID: 0}
     - target: {fileID: 5462227956294652855, guid: 1e0fcd9481438a84e91589981cf55f44, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

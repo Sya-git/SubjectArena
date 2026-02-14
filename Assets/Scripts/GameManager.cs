@@ -1,6 +1,7 @@
 using System;
 using SubjectArena.Player;
 using SubjectArena.UI.Inventory;
+using Unity.Cinemachine;
 using UnityEngine;
 
 namespace SubjectArena
@@ -10,6 +11,7 @@ namespace SubjectArena
         [SerializeField] private Transform playerSpawnPoint;
         [SerializeField] private PlayerController playerPrefab;
         [SerializeField] private CanvasInventoryManager canvasInventoryManager;
+        [SerializeField] private CinemachineCamera cinemachineCamera;
         
         public static GameManager Instance;
         
@@ -32,6 +34,7 @@ namespace SubjectArena
         {
             Player = Instantiate(playerPrefab, playerSpawnPoint.position, playerSpawnPoint.rotation);
             canvasInventoryManager.Initialize(Player);
+            cinemachineCamera.Target = new CameraTarget() { TrackingTarget = Player.transform };
         }
     }
 }

@@ -79,7 +79,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SubjectArena.Player.PlayerController
   playerInputProcessor: {fileID: 568167767237768439}
   characterControllerMotor: {fileID: 2626806802872694891}
-  inventoryManager: {fileID: 0}
+  inventoryManager: {fileID: 6147914797050620065}
   health: {fileID: 4139892970846056044}
 --- !u!114 &568167767237768439
 MonoBehaviour:
@@ -93,8 +93,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce0bbbad4ebf6e34dba65b8da7158bbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SubjectArena.Input.PlayerInputProcessor
-  movement: {fileID: 0}
-  useItem: []
+  actionMap: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!114 &2626806802872694891
 MonoBehaviour:
   m_ObjectHideFlags: 0
