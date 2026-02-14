@@ -19,7 +19,7 @@ namespace SubjectArena.Entities
         {
             if (CurrentHealth <= 0) return;
             
-            CurrentHealth -= damage;
+            CurrentHealth -= Math.Min(damage, CurrentHealth);
         }
     }
 }

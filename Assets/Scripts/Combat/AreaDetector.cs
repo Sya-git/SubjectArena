@@ -11,7 +11,12 @@ namespace SubjectArena.Combat
         public event Action<Collider> OnTargetEnter;
         public event Action<Collider> OnTargetExit;
         
-        private readonly HashSet<Collider> collidersInArea = new();
+        private readonly HashSet<Collider> collidersInArea = new(capacity: 128);
+
+        private void OnDisable()
+        {
+            collidersInArea.Clear();
+        }
 
         private void AddColliderToList(Collider col)
         {
