@@ -1,12 +1,11 @@
 using System;
 using System.IO;
+using SubjectArena.Items.Inventory.UI;
 using SubjectArena.Player;
-using SubjectArena.UI.Inventory;
 using Unity.Cinemachine;
-using Unity.VisualScripting;
 using UnityEngine;
 
-namespace SubjectArena
+namespace SubjectArena.Managers
 {
     public class GameManager : MonoBehaviour
     {
@@ -40,8 +39,8 @@ namespace SubjectArena
             LoadSaveDataFromDisk();
         }
 
-        private const string _saveFileName = "save";
-        private static string SaveFilePath => Path.Combine(Application.persistentDataPath, _saveFileName);
+        private const string SaveFileName = "save";
+        private static string SaveFilePath => Path.Combine(Application.persistentDataPath, SaveFileName);
         private void SaveDataToDisk()
         {
             try

@@ -2,7 +2,7 @@ using SubjectArena.Player;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace SubjectArena.UI.Inventory
+namespace SubjectArena.Items.Inventory.UI
 {
     public class CanvasInventoryManager : MonoBehaviour
     {
@@ -10,11 +10,12 @@ namespace SubjectArena.UI.Inventory
         [SerializeField] private Transform usableItemsHolder;
         [SerializeField] private Transform bagItemsHolder;
         [SerializeField] private CanvasItemSlot dragItemDummy;
+        [SerializeField] private CanvasItemTooltip itemTooltip;
 
         private CanvasItemSlot[] _usableItems;
         private CanvasItemSlot[] _bagItems;
 
-        private PlayerInventory _inventory;
+        private InventoryController _inventory;
         private bool _isDragging;
 
         private void Awake()
@@ -47,8 +48,9 @@ namespace SubjectArena.UI.Inventory
         public void Initialize(PlayerController player)
         {
             dragItemDummy.gameObject.SetActive(false);
+            itemTooltip.gameObject.SetActive(false);
             
-            _inventory = player.GetComponent<PlayerInventory>();
+            _inventory = player.GetComponent<InventoryController>();
             if (_inventory)
             {
                 _bagItems = new CanvasItemSlot[_inventory.BagSlots.Length];
@@ -59,7 +61,10 @@ namespace SubjectArena.UI.Inventory
                     canvasBagSlot.Evt_OnBeginDrag += OnDragStart;
                     canvasBagSlot.Evt_OnDrag += OnDrag;
                     canvasBagSlot.Evt_OnEndDrag += OnDragEnd;
-                    canvasBagSlot.Refresh(i, bagSlot, PlayerInventory.SlotType.Bag);
+                    canvasBagSlot.Evt_OnPointerEnter += OnPointerEnter;
+                    canvasBagSlot.Evt_OnPointerMove += OnPointerMove;
+                    canvasBagSlot.Evt_OnPointerExit += OnPointerExit;
+                    canvasBagSlot.Refresh(i, bagSlot, InventoryController.SlotType.Bag);
                     _bagItems[i] = canvasBagSlot;
                 }
                 
@@ -71,25 +76,32 @@ namespace SubjectArena.UI.Inventory
                     canvasUsableSlot.Evt_OnBeginDrag += OnDragStart;
                     canvasUsableSlot.Evt_OnDrag += OnDrag;
                     canvasUsableSlot.Evt_OnEndDrag += OnDragEnd;
-                    canvasUsableSlot.Refresh(i, usableSlot, PlayerInventory.SlotType.Usable);
+                    canvasUsableSlot.Evt_OnPointerEnter += OnPointerEnter;
+                    canvasUsableSlot.Evt_OnPointerMove += OnPointerMove;
+                    canvasUsableSlot.Evt_OnPointerExit += OnPointerExit;
+                    canvasUsableSlot.Refresh(i, usableSlot, InventoryController.SlotType.Usable);
                     _usableItems[i] = canvasUsableSlot;
                 }
                 _inventory.OnSlotChanged += OnInventorySlotChanged;
             }
         }
 
-        private void OnInventorySlotChanged(PlayerInventory.SlotType type, int slotIndex)
+        private void OnInventorySlotChanged(InventoryController.SlotType type, int slotIndex)
         {
             if (!_inventory.GetItemAtSlot(type, slotIndex, out var itemStack))
             {
                 return;
             }
             
-            var canvasItemSlot = (type == PlayerInventory.SlotType.Usable
+            var canvasItemSlot = (type == InventoryController.SlotType.Usable
                 ? _usableItems
                 : _bagItems)[slotIndex];
             
             canvasItemSlot.Refresh(slotIndex, itemStack, type);
+            if (itemTooltip.gameObject.activeSelf && itemTooltip.SlotType == type && itemTooltip.SlotIndex == slotIndex)
+            {
+                itemTooltip.Activate(canvasItemSlot.ItemStack, type, slotIndex);
+            }
         }
 
         private void OnDragStart(CanvasItemSlot itemSlot, PointerEventData pointerEvent)
@@ -99,7 +111,7 @@ namespace SubjectArena.UI.Inventory
             dragItemDummy.Refresh(itemSlot.SlotIndex, itemSlot.ItemStack, itemSlot.SlotType);
             dragItemDummy.transform.position = pointerEvent.position;
             dragItemDummy.gameObject.SetActive(true);
-            _isDragging = true;
+            SetDragging(true);
         }
 
         private void OnDrag(CanvasItemSlot itemSlot, PointerEventData pointerEvent)
@@ -124,7 +136,51 @@ namespace SubjectArena.UI.Inventory
                 _inventory.DestroyItemAtSlot(fromSlot.SlotType, fromSlot.SlotIndex);
             }
             
-            _isDragging = false;
+            SetDragging(false);
+        }
+        
+        private void OnPointerEnter(CanvasItemSlot itemSlot, PointerEventData pointerEvent)
+        {
+            if (_isDragging) return;
+
+            if (itemSlot.ItemStack.ItemData)
+            {
+                itemTooltip.Activate(itemSlot.ItemStack, itemSlot.SlotType, itemSlot.SlotIndex);
+            }
+        }
+
+        private void OnPointerMove(CanvasItemSlot itemSlot, PointerEventData pointerEvent)
+        {
+            if (_isDragging) return;
+            
+            if (itemTooltip.gameObject.activeSelf)
+            {
+                itemTooltip.Move(pointerEvent.position);
+            }
+            else
+            {
+                itemTooltip.Activate(itemSlot.ItemStack, itemSlot.SlotType, itemSlot.SlotIndex);
+            }
+        }
+
+        private void OnPointerExit(CanvasItemSlot itemSlot, PointerEventData pointerEvent)
+        {
+            if (_isDragging) return;
+            
+            if (itemTooltip.gameObject.activeSelf)
+            {
+                itemTooltip.Disable();
+            }
+        }
+
+        private void SetDragging(bool isDragging)
+        {
+            _isDragging = isDragging;
+
+            if (_isDragging && itemTooltip.gameObject.activeSelf)
+            {
+                itemTooltip.Disable();
+            }
         }
 
         private CanvasItemSlot SpawnItemSlot(Transform holder)

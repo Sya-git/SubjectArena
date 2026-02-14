@@ -1,7 +1,7 @@
 using System;
-using System.Collections.Generic;
 using SubjectArena.Combat;
 using SubjectArena.Input;
+using SubjectArena.Items.Inventory;
 using SubjectArena.Movement;
 using SubjectArena.Utils;
 using UnityEngine;
@@ -13,10 +13,11 @@ namespace SubjectArena.Player
     {
         [SerializeField] private PlayerInputProcessor playerInputProcessor;
         [SerializeField] private CharacterControllerMotor characterControllerMotor;
-        [FormerlySerializedAs("inventoryManager")] [SerializeField] private PlayerInventory inventory;
+        [FormerlySerializedAs("inventoryManager")]
+        [SerializeField] private InventoryController inventory;
         [SerializeField] private Health health;
 
-        public PlayerInventory Inventory => inventory;
+        public InventoryController Inventory => inventory;
         private Camera _mainCamera;
         
         private void Awake()

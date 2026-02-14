@@ -4,9 +4,9 @@ using SubjectArena.Items;
 using SubjectArena.Items.Data;
 using UnityEngine;
 
-namespace SubjectArena.Player
+namespace SubjectArena.Items.Inventory
 {
-    public class PlayerInventory : MonoBehaviour
+    public class InventoryController : MonoBehaviour
     {
         [SerializeField] private int usableSlotsAmount = 1;
         [SerializeField] private int bagSlotsAmount = 3;

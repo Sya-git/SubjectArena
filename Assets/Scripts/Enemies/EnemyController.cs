@@ -1,4 +1,5 @@
 using SubjectArena.Combat;
+using SubjectArena.Managers;
 using SubjectArena.Movement;
 using SubjectArena.Player;
 using SubjectArena.Utils;
