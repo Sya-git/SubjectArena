@@ -14,6 +14,7 @@ namespace SubjectArena.Player
         [SerializeField] private PlayerInventoryManager inventoryManager;
         [SerializeField] private Health health;
 
+        public PlayerInventoryManager InventoryManager => inventoryManager;
         private Camera _mainCamera;
         
         private void Awake()

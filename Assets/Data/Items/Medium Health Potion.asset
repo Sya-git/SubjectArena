@@ -16,4 +16,5 @@ MonoBehaviour:
   description: Use it to recover 5 HP
   icon: {fileID: 21300000, guid: 2893fd443ff26d840822aeb4fdfed294, type: 3}
   maxStack: 2
+  groundItemPrefab: {fileID: 583841128862753584, guid: 5ce3f3aba76d1a04d931c1f09a300e19, type: 3}
   healAmount: 5
