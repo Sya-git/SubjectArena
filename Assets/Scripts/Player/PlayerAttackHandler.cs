@@ -7,6 +7,7 @@ namespace SubjectArena.Player
     public class PlayerAttackHandler : MonoBehaviour
     {
         [SerializeField] private DamageArea damageArea;
+        [SerializeField] private ParticleSystem attackStartVfx;
         [SerializeField] private float windupDuration = 0.3f;
         [SerializeField] private float attackDuration = 0.2f;
         [SerializeField] private float cooldownDuration = 0.5f;
@@ -63,6 +64,7 @@ namespace SubjectArena.Player
             _phase = AttackPhase.Active;
             _timer = 0f;
             damageArea.gameObject.SetActive(true);
+            attackStartVfx.Play();
             Evt_OnAttackStarted?.Invoke();
         }
 
