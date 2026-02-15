@@ -6,6 +6,7 @@ namespace SubjectArena.Combat
     public class Health : MonoBehaviour
     {
         [SerializeField] private uint baseHealth = 10;
+        [SerializeField] private ParticleSystem healVfx;
         
         public uint MaxHealth => baseHealth;
         public uint CurrentHealth { get; private set; }
@@ -41,6 +42,7 @@ namespace SubjectArena.Combat
             CurrentHealth = Math.Min(CurrentHealth + amount, MaxHealth);
             if (oldHealth != CurrentHealth)
             {
+                healVfx.Play();
                 Evt_OnHealthChanged?.Invoke(oldHealth, CurrentHealth);
             }
         }
