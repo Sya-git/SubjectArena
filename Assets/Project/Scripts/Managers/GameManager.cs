@@ -10,6 +10,7 @@ namespace SubjectArena.Managers
 {
     public class GameManager : MonoBehaviour
     {
+        [SerializeField] private SpawnerManager spawnerManager;
         [SerializeField] private Transform playerSpawnPoint;
         [SerializeField] private PlayerController playerPrefab;
         [SerializeField] private CanvasInventoryManager canvasInventoryManager;
@@ -36,10 +37,16 @@ namespace SubjectArena.Managers
         private void Start()
         {
             Player = Instantiate(playerPrefab, playerSpawnPoint.position, playerSpawnPoint.rotation);
+            Player.Health.OnDeath += OnPlayerDeath;
             canvasInventoryManager.Initialize(Player);
             playerHealthBar.Initialize(Player.Health);
             cinemachineCamera.Target = new CameraTarget() { TrackingTarget = Player.transform };
             LoadSaveDataFromDisk();
+        }
+
+        private void OnPlayerDeath()
+        {
+            spawnerManager.StopSpawn();
         }
 
         private const string SaveFileName = "save";

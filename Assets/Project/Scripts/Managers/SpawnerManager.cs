@@ -17,6 +17,7 @@ namespace SubjectArena.Managers
 
         private int _currentWave = 0;
         private float _waveSpawnTimer = 0f;
+        private bool _shouldSpawn = true;
         
         private void OnDrawGizmosSelected()
         {
@@ -28,8 +29,15 @@ namespace SubjectArena.Managers
             _waveSpawnTimer = 0f;
         }
 
+        public void StopSpawn()
+        {
+            _shouldSpawn = false;
+        }
+
         private void Update()
         {
+            if (!_shouldSpawn) return;
+            
             _waveSpawnTimer += Time.deltaTime;
             if (_waveSpawnTimer >= waveSpawnDelay)
             {
