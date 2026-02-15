@@ -43,7 +43,7 @@ namespace SubjectArena.Managers
         {
             if (currentWave >= waveSpawnData.Length)
             {
-                currentWave = 0;
+                currentWave = waveSpawnData.Length - 1;
             }
             
             var currentWaveData = waveSpawnData[currentWave];
