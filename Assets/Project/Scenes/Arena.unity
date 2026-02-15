@@ -699,8 +699,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
-  m_LocalPosition: {x: 0, y: 17, z: -10}
+  m_LocalRotation: {x: 0.5461019, y: 0, z: 0, w: 0.8377187}
+  m_LocalPosition: {x: 0, y: 16.9, z: -7.57}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -826,7 +826,7 @@ MonoBehaviour:
       Time: 2
     Restrictions: 0
   TiltAxis:
-    Value: 60
+    Value: 66.2
     Center: 0
     Range: {x: -70, y: 70}
     Wrap: 0
@@ -853,7 +853,7 @@ MonoBehaviour:
     AngularDampingMode: 0
     RotationDamping: {x: 1, y: 1, z: 1}
     QuaternionDamping: 1
-  FollowOffset: {x: 0, y: 17, z: -10}
+  FollowOffset: {x: 0, y: 16.9, z: -7.57}
 --- !u!114 &402252202
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -905,8 +905,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 402252199}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
-  m_LocalPosition: {x: 0, y: 17, z: -10}
+  m_LocalRotation: {x: 0.5461019, y: 0, z: 0, w: 0.8377187}
+  m_LocalPosition: {x: 0, y: 16.9, z: -7.57}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3377,7 +3377,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 323315384197329, guid: 1e0fcd9481438a84e91589981cf55f44, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 568167767237768439, guid: 1e0fcd9481438a84e91589981cf55f44, type: 3}
       propertyPath: iaAsset
