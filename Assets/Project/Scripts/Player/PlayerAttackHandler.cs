@@ -6,6 +6,7 @@ namespace SubjectArena.Player
 {
     public class PlayerAttackHandler : MonoBehaviour
     {
+        [SerializeField] private PlayerController player;
         [SerializeField] private DamageArea damageArea;
         [SerializeField] private ParticleSystem attackStartVfx;
         [SerializeField] private float windupDuration = 0.3f;
@@ -32,6 +33,14 @@ namespace SubjectArena.Player
 
         private void Update()
         {
+            if (!player.Health.IsAlive)
+            {
+                if (_phase != AttackPhase.Idle)
+                {
+                    EnterIdlePhase();
+                }
+                return;
+            }
             if (_phase == AttackPhase.Idle)
             {
                 _phase = AttackPhase.Windup;
