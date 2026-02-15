@@ -3359,7 +3359,7 @@ MonoBehaviour:
       amount: 3
   spawnRadius: 20.2
   spawnParticles: {fileID: 5911206648629905745, guid: 1eb833340b41fb444b576c4dced8d4dc, type: 3}
-  waveSpawnDelay: 5
+  waveSpawnDelay: 10
 --- !u!1 &1307128325
 GameObject:
   m_ObjectHideFlags: 0
