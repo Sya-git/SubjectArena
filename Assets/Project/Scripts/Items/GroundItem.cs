@@ -7,7 +7,7 @@ namespace SubjectArena.Items
     {
         [SerializeField] private SpriteRenderer spriteRenderer;
         
-        public UsableItemStack ItemStack;
+        [NonSerialized] public UsableItemStack ItemStack;
 
         public event Action OnPickedUp;
 
