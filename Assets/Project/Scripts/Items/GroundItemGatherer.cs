@@ -25,10 +25,5 @@ namespace SubjectArena.Items
         {
             TryGatherGroundItem(other.gameObject.GetComponentInParent<GroundItem>());
         }
-
-        private void OnTriggerStay(Collider other)
-        {
-            TryGatherGroundItem(other.gameObject.GetComponentInParent<GroundItem>());
-        }
     }
 }
