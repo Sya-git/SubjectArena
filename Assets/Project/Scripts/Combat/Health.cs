@@ -42,7 +42,7 @@ namespace SubjectArena.Combat
             CurrentHealth = Math.Min(CurrentHealth + amount, MaxHealth);
             if (oldHealth != CurrentHealth)
             {
-                healVfx.Play();
+                if (healVfx) healVfx.Play();
                 Evt_OnHealthChanged?.Invoke(oldHealth, CurrentHealth);
             }
         }

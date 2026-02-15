@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace SubjectArena.Combat
 {
@@ -6,6 +7,7 @@ namespace SubjectArena.Combat
     {
         [SerializeField] private float destroyDelay = 1f;
         [SerializeField] private Health health;
+        [SerializeField] private ParticleSystem destroyParticles;
 
         private void Awake()
         {
@@ -14,7 +16,20 @@ namespace SubjectArena.Combat
 
         private void OnDeath()
         {
-            Destroy(gameObject, destroyDelay);
+            StartCoroutine(PlayParticlesAndDestroy());
+        }
+
+        private IEnumerator PlayParticlesAndDestroy()
+        {
+            yield return new WaitForSeconds(destroyDelay);
+            
+            if (destroyParticles)
+            {
+                destroyParticles.transform.SetParent(null, true);
+                destroyParticles.Play();
+                Destroy(destroyParticles.gameObject, destroyParticles.main.duration);
+            }
+            Destroy(gameObject);
         }
     }
 }

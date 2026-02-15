@@ -9,22 +9,41 @@ namespace SubjectArena.Enemies
 {
     public class EnemyController : MonoBehaviour
     {
+        private static readonly int AnimMovingParameter = Animator.StringToHash("Moving");
+        private static readonly int AnimDieParameter = Animator.StringToHash("Die");
+        private static readonly int AnimGetHitParameter = Animator.StringToHash("Hit");
+        
+        [SerializeField] private Animator animator;
         [SerializeField] private CharacterControllerMotor motor;
         [SerializeField] private Health health;
 
         private void Start()
         {
             health.OnDeath += OnDeath;
+            health.Evt_OnHealthChanged += OnHealthChanged;
+        }
+
+        private void OnHealthChanged(uint oldValue, uint newValue)
+        {
+            if (newValue != 0)
+            {
+                animator.SetTrigger(AnimGetHitParameter);
+            }
         }
 
         private void OnDeath()
         {
             motor.Walk(Vector2.zero);
+            animator.SetTrigger(AnimDieParameter);
         }
 
         private void Update()
         {
-            if (!health.IsAlive) return;
+            if (!health.IsAlive)
+            {
+                animator.SetBool(AnimMovingParameter, false);
+                return;
+            }
             
             var gameManager = GameManager.Instance;
             if (gameManager && gameManager.Player)
@@ -32,6 +51,7 @@ namespace SubjectArena.Enemies
                 var moveDirection = GetMoveDirectionToPlayer(gameManager.Player);
                 motor.Walk(moveDirection);
                 motor.LookAt(moveDirection.ToVector3X0Z());
+                animator.SetBool(AnimMovingParameter, true);
             }
         }
 
