@@ -164,7 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SubjectArena.Movement.CharacterControllerMovement
   characterController: {fileID: 8754726996420313640}
-  moveSpeed: 4
+  moveSpeed: 1
   gravity: -9.81
   rotationSpeed: 720
 --- !u!114 &1865282343740991486
@@ -194,7 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60c75b49080cc7b41ad3f6abe278e83a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SubjectArena.Entities.Health
-  baseHealth: 30
+  baseHealth: 60
   healVfx: {fileID: 0}
 --- !u!54 &5893498538285872866
 Rigidbody:
@@ -254,7 +254,7 @@ MonoBehaviour:
   possibleDrops:
   - itemData: {fileID: 11400000, guid: 4c424d6e222724e4182fb89ce19faac5, type: 2}
     minQuantity: 1
-    maxQuantity: 1
+    maxQuantity: 2
     oneInX: 15
 --- !u!1 &646342837546968068
 GameObject:

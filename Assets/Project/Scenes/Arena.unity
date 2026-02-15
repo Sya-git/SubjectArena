@@ -1919,16 +1919,55 @@ MonoBehaviour:
   waveSpawnData:
   - spawnData:
     - enemyPrefab: {fileID: 1865282343740991486, guid: 85848ee1794b9bf4cbaf60a37a3bccfc, type: 3}
+      amount: 1
+  - spawnData:
+    - enemyPrefab: {fileID: 1865282343740991486, guid: 85848ee1794b9bf4cbaf60a37a3bccfc, type: 3}
+      amount: 2
+  - spawnData:
+    - enemyPrefab: {fileID: 1865282343740991486, guid: 85848ee1794b9bf4cbaf60a37a3bccfc, type: 3}
+      amount: 3
+  - spawnData:
+    - enemyPrefab: {fileID: 1865282343740991486, guid: 85848ee1794b9bf4cbaf60a37a3bccfc, type: 3}
+      amount: 3
+    - enemyPrefab: {fileID: 1865282343740991486, guid: 758d42e9665a90e478edd2af8fb1d883, type: 3}
+      amount: 1
+  - spawnData:
+    - enemyPrefab: {fileID: 1865282343740991486, guid: 85848ee1794b9bf4cbaf60a37a3bccfc, type: 3}
+      amount: 3
+    - enemyPrefab: {fileID: 1865282343740991486, guid: 758d42e9665a90e478edd2af8fb1d883, type: 3}
+      amount: 1
+  - spawnData:
+    - enemyPrefab: {fileID: 1865282343740991486, guid: 85848ee1794b9bf4cbaf60a37a3bccfc, type: 3}
+      amount: 3
+    - enemyPrefab: {fileID: 1865282343740991486, guid: 758d42e9665a90e478edd2af8fb1d883, type: 3}
+      amount: 1
+  - spawnData:
+    - enemyPrefab: {fileID: 1865282343740991486, guid: 85848ee1794b9bf4cbaf60a37a3bccfc, type: 3}
+      amount: 3
+    - enemyPrefab: {fileID: 1865282343740991486, guid: 758d42e9665a90e478edd2af8fb1d883, type: 3}
+      amount: 1
+  - spawnData:
+    - enemyPrefab: {fileID: 1865282343740991486, guid: 85848ee1794b9bf4cbaf60a37a3bccfc, type: 3}
+      amount: 3
+    - enemyPrefab: {fileID: 1865282343740991486, guid: 758d42e9665a90e478edd2af8fb1d883, type: 3}
+      amount: 1
+  - spawnData:
+    - enemyPrefab: {fileID: 1865282343740991486, guid: 85848ee1794b9bf4cbaf60a37a3bccfc, type: 3}
       amount: 5
   - spawnData:
     - enemyPrefab: {fileID: 1865282343740991486, guid: 85848ee1794b9bf4cbaf60a37a3bccfc, type: 3}
       amount: 15
-    - enemyPrefab: {fileID: 1865282343740991486, guid: 85848ee1794b9bf4cbaf60a37a3bccfc, type: 3}
+    - enemyPrefab: {fileID: 1865282343740991486, guid: bd6e53136a5088b4fb1f2f9c6becd908, type: 3}
       amount: 1
   - spawnData:
     - enemyPrefab: {fileID: 1865282343740991486, guid: 85848ee1794b9bf4cbaf60a37a3bccfc, type: 3}
       amount: 30
+    - enemyPrefab: {fileID: 1865282343740991486, guid: bd6e53136a5088b4fb1f2f9c6becd908, type: 3}
+      amount: 2
+  - spawnData:
     - enemyPrefab: {fileID: 1865282343740991486, guid: 85848ee1794b9bf4cbaf60a37a3bccfc, type: 3}
+      amount: 30
+    - enemyPrefab: {fileID: 1865282343740991486, guid: bd6e53136a5088b4fb1f2f9c6becd908, type: 3}
       amount: 3
   spawnRadius: 20.2
   spawnParticles: {fileID: 5911206648629905745, guid: 1eb833340b41fb444b576c4dced8d4dc, type: 3}

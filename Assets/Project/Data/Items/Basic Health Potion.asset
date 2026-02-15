@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SubjectArena.Items.HealItemData
   guid: 9150b8478e5de2748aca10191f16b9e5
   itemName: Basic Health Potion
-  description: Use it to recover 5 HP
+  description: Use it to recover <color=green>2</color> HP
   icon: {fileID: 21300000, guid: 2273b8d99dc5af64fa857fed095037c1, type: 3}
   maxStack: 3
   groundItemPrefab: {fileID: 583841128862753584, guid: 43ab2954892674a44ad3cc3d6bb3e802, type: 3}
-  healAmount: 1
+  healAmount: 2
