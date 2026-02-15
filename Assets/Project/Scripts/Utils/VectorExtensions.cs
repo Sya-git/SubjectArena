@@ -17,6 +17,16 @@ namespace SubjectArena.Utils
         /// <returns>A Vector3 with the x component equal to the x of the Vector2,
         /// the y component set to zero, and the z component equal to the y of the Vector2.</returns>
         public static Vector3 ToVector3X0Z(this Vector2 v2) => new Vector3(v2.x, 0, v2.y);
+
+        public static float Damp(this float current, float target, float dampTime, float deltaTime)
+        {
+            if (dampTime < 0.0001f) return target;
+
+            float k = Mathf.Log(2f) / dampTime;
+            float step = 1f - Mathf.Exp(-k * deltaTime);
+
+            return Mathf.Lerp(current, target, step);
+        }
         
     }
 }

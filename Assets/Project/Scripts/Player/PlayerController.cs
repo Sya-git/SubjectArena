@@ -24,6 +24,7 @@ namespace SubjectArena.Player
         [SerializeField] private Animator animator;
 
         public InventoryController Inventory => inventory;
+        public Health Health => health;
         private Camera _mainCamera;
         
         private void Awake()

@@ -11,8 +11,10 @@ namespace SubjectArena.Combat
         public uint CurrentHealth { get; private set; }
         public bool IsAlive => CurrentHealth > 0;
         public event Action OnDeath;
+        public delegate void OnHealthChangedDelegate(uint oldValue, uint newValue);
+        public event OnHealthChangedDelegate Evt_OnHealthChanged;
 
-        private void Start()
+        private void Awake()
         {
             CurrentHealth = baseHealth;
         }
@@ -21,7 +23,13 @@ namespace SubjectArena.Combat
         {
             if (CurrentHealth <= 0) return;
             
+            var oldHealth = CurrentHealth;
             CurrentHealth -= Math.Min(damage, CurrentHealth);
+            if (oldHealth != CurrentHealth)
+            {
+                Evt_OnHealthChanged?.Invoke(oldHealth, CurrentHealth);
+            }
+            
             if (CurrentHealth == 0) OnDeath?.Invoke();
         }
 
@@ -29,7 +37,12 @@ namespace SubjectArena.Combat
         {
             if (CurrentHealth <= 0) return;
 
+            var oldHealth = CurrentHealth;
             CurrentHealth = Math.Min(CurrentHealth + amount, MaxHealth);
+            if (oldHealth != CurrentHealth)
+            {
+                Evt_OnHealthChanged?.Invoke(oldHealth, CurrentHealth);
+            }
         }
     }
 }

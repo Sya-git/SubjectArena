@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using SubjectArena.Combat.UI;
 using SubjectArena.Items.Inventory.UI;
 using SubjectArena.Player;
 using Unity.Cinemachine;
@@ -12,6 +13,7 @@ namespace SubjectArena.Managers
         [SerializeField] private Transform playerSpawnPoint;
         [SerializeField] private PlayerController playerPrefab;
         [SerializeField] private CanvasInventoryManager canvasInventoryManager;
+        [SerializeField] private CanvasHealthBar playerHealthBar;
         [SerializeField] private CinemachineCamera cinemachineCamera;
         
         public static GameManager Instance;
@@ -35,6 +37,7 @@ namespace SubjectArena.Managers
         {
             Player = Instantiate(playerPrefab, playerSpawnPoint.position, playerSpawnPoint.rotation);
             canvasInventoryManager.Initialize(Player);
+            playerHealthBar.Initialize(Player.Health);
             cinemachineCamera.Target = new CameraTarget() { TrackingTarget = Player.transform };
             LoadSaveDataFromDisk();
         }
