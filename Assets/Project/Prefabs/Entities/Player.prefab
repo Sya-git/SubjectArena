@@ -192,8 +192,6 @@ MonoBehaviour:
   BagSlots:
   - ItemData: {fileID: 0}
     Quantity: 0
-  - ItemData: {fileID: 0}
-    Quantity: 0
   - ItemData: {fileID: 11400000, guid: fcefa06cca8c6f8429b5822d61ba673a, type: 2}
     Quantity: 2
 --- !u!1 &2679833623287667354
