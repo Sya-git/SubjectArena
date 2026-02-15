@@ -13,7 +13,7 @@ namespace SubjectArena.Items
 
         public void Setup(UsableItemStack itemStack)
         {
-            
+            ItemStack = itemStack;
         }
         public void Pickup()
         {
