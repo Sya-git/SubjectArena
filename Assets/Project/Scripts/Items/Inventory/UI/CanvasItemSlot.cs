@@ -3,6 +3,7 @@ using SubjectArena.Player;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace SubjectArena.Items.Inventory.UI
@@ -10,8 +11,11 @@ namespace SubjectArena.Items.Inventory.UI
     public class CanvasItemSlot : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerEnterHandler,
         IPointerMoveHandler, IPointerExitHandler
     {
-        [SerializeField] private Image _imgItem;
-        [SerializeField] private TMP_Text _txtAmount;
+        [FormerlySerializedAs("_imgItem")]
+        [SerializeField] private Image imgItem;
+        [FormerlySerializedAs("_txtAmount")]
+        [SerializeField] private TMP_Text txtAmount;
+        [SerializeField] private TMP_Text txtUseInput;
 
         public UsableItemStack ItemStack { get; private set; }
         public InventoryController.SlotType SlotType { get; private set; }
@@ -30,7 +34,7 @@ namespace SubjectArena.Items.Inventory.UI
         public void OnDrag(PointerEventData eventData) => Evt_OnDrag?.Invoke(this, eventData);
 
         public void OnEndDrag(PointerEventData eventData) => Evt_OnEndDrag?.Invoke(this, eventData);
-
+        
         public void Refresh(int slotIndex, UsableItemStack itemStack, InventoryController.SlotType slotType)
         {
             SlotIndex = slotIndex;
@@ -39,17 +43,28 @@ namespace SubjectArena.Items.Inventory.UI
 
             if (itemStack.ItemData)
             {
-                _imgItem.sprite = itemStack.ItemData.Icon;
-                _txtAmount.text = itemStack.Quantity.ToString();
+                imgItem.sprite = itemStack.ItemData.Icon;
+                imgItem.color = Color.white;
+                txtAmount.text = $"x{itemStack.Quantity}";
 
-                _imgItem.color = itemStack.Quantity == 0
-                    ? new Color(_imgItem.color.r, _imgItem.color.g, _imgItem.color.b, 0.5f)
+                imgItem.color = itemStack.Quantity == 0
+                    ? new Color(imgItem.color.r, imgItem.color.g, imgItem.color.b, 0.5f)
                     : Color.white;
             }
             else
             {
-                _imgItem.sprite = null;
-                _txtAmount.text = "";
+                imgItem.sprite = null;
+                imgItem.color = new Color(1, 1, 1, 0);
+                txtAmount.text = "";
+            }
+
+            if (slotType == InventoryController.SlotType.Usable)
+            {
+                txtUseInput.text = (SlotIndex + 1).ToString();
+            }
+            else
+            {
+                txtUseInput.gameObject.SetActive(false);
             }
         }
 

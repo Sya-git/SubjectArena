@@ -183,7 +183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SubjectArena.Player.PlayerInventoryManager
   usableSlotsAmount: 1
-  bagSlotsAmount: 3
+  bagSlotsAmount: 2
   UsableSlots:
   - ItemData: {fileID: 11400000, guid: 9150b8478e5de2748aca10191f16b9e5, type: 2}
     Quantity: 3
