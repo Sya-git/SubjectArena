@@ -194,7 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60c75b49080cc7b41ad3f6abe278e83a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SubjectArena.Entities.Health
-  baseHealth: 60
+  baseHealth: 12
   healVfx: {fileID: 0}
 --- !u!54 &5893498538285872866
 Rigidbody:
